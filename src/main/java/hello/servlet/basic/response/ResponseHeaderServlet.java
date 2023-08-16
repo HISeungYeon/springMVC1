@@ -2,6 +2,7 @@ package hello.servlet.basic.response;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -24,7 +25,9 @@ public class ResponseHeaderServlet extends HttpServlet {
         response.setHeader("my-header", "hello");
 
         //[Header 편의 메서드]
-        content(response);
+//        content(response);
+//        cookie(response);
+        redirect(response);
 
         PrintWriter writer = response.getWriter();
         writer.print("하이루");
@@ -38,5 +41,25 @@ public class ResponseHeaderServlet extends HttpServlet {
         response.setContentType("text/plain");
         response.setCharacterEncoding("utf-8");
         //response.setContentLength(2); //(생략시 자동 생성)
+    }
+
+    private void cookie(HttpServletResponse response) {
+        //Set-Cookie: myCookie=good; Max-Age=600;
+        //response.setHeader("Set-Cookie", "myCookie=good; Max-Age=600"); 이렇게 해도 됨
+        Cookie cookie = new Cookie("myCookie", "good");
+        cookie.setMaxAge(600); //600초
+        response.addCookie(cookie);
+    }
+
+    private void redirect(HttpServletResponse response) throws IOException {
+        //Status Code 302
+        //Location: /basic/hello-form.html
+
+        // 1번째 방법
+//        response.setStatus(HttpServletResponse.SC_FOUND); //302
+//        response.setHeader("Location", "/basic/hello-form.html");
+
+        // 2번째 간단한 방법
+        response.sendRedirect("/basic/hello-form.html");
     }
 }
