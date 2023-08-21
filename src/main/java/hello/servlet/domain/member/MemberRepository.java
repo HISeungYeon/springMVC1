@@ -20,6 +20,7 @@ public class MemberRepository {
         return instance;
     }
 
+    //싱글톤
     private MemberRepository() {}
 
     public Member save(Member member) {
