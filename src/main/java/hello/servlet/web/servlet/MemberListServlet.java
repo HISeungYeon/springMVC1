@@ -13,7 +13,7 @@ import java.io.PrintWriter;
 import java.util.List;
 
 @WebServlet(name = "memberListServlet", urlPatterns = "/servlet/members")
-public class MEmberListServlet extends HttpServlet {
+public class MemberListServlet extends HttpServlet {
 
     private MemberRepository memberRepository = MemberRepository.getInstance();
 
